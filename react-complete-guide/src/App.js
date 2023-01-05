@@ -1,8 +1,10 @@
-import './App.css';
 import React from 'react';
-import Expenses from './components/Expenses';
+import './App.css';
 
-function App() {
+import NewExpense from './components/NewExpense/NewExpense';
+import Expenses from './components/Expenses/Expenses'
+
+const App = () => {
   const expenses = [
     {
       title : 'Car Insurance costs',
@@ -28,7 +30,7 @@ function App() {
 
   return (
     <div>
-      <h2>Let's get Started</h2>
+      <NewExpense />
       <Expenses items={expenses}/>
     </div>
   );
