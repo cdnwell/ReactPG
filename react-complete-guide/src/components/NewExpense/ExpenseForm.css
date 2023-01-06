@@ -1,0 +1,66 @@
+.new-expense__form {
+    width: 90%;
+    height:250px;
+    border-radius: 10px;
+    background-color: rgb(177, 177, 177);
+
+    position: relative;
+}
+
+.new-expense__control:nth-child(1){
+    position: absolute;
+    left: calc( 5% );
+    top: calc( 15% );
+}
+
+.new-expense__control:nth-child(1) label {
+    font-size: 30px;
+}
+
+.new-expense__control:nth-child(1) input {
+    width: 150px;
+    height: 30px;
+    margin-left: 65px;
+}
+
+.new-expense__control:nth-child(2){
+    position: absolute;
+    left: calc( 5% );
+    top: calc( 55% );
+}
+
+.new-expense__control:nth-child(2) label {
+    font-size: 30px;
+}
+
+.new-expense__control:nth-child(2) input {
+    width: 150px;
+    height: 30px;
+    margin-left: 15px;
+}
+
+.new-expense__control:nth-child(3){
+    right: calc( 15% );
+    top: calc( 15% );
+    position: absolute;
+}
+
+.new-expense__control:nth-child(3) label {
+    font-size: 30px;
+}
+
+.new-expense__control:nth-child(3) input {
+    width: 150px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.new-expense__actions button {
+    position: absolute;
+
+    width: 150px;
+    height: 30px;
+
+    top: calc( 61% );
+    right: calc( 15% );
+}
