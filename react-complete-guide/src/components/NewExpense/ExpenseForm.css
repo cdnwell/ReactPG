@@ -1,8 +1,9 @@
 .new-expense__form {
-    width: 90%;
+    width: 850px;
     height:250px;
     border-radius: 10px;
-    background-color: rgb(177, 177, 177);
+    background-color: rgb(110, 109, 109);
+    color: white;
 
     position: relative;
 }
@@ -10,7 +11,11 @@
 .new-expense__control:nth-child(1){
     position: absolute;
     left: calc( 5% );
-    top: calc( 15% );
+    top: calc( 17% );
+
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;
 }
 
 .new-expense__control:nth-child(1) label {
@@ -26,7 +31,11 @@
 .new-expense__control:nth-child(2){
     position: absolute;
     left: calc( 5% );
-    top: calc( 55% );
+    top: calc( 57% );
+
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;
 }
 
 .new-expense__control:nth-child(2) label {
@@ -41,8 +50,12 @@
 
 .new-expense__control:nth-child(3){
     right: calc( 15% );
-    top: calc( 15% );
+    top: calc( 17% );
     position: absolute;
+
+    display: flex; 
+    flex-direction: row; 
+    align-items: center;
 }
 
 .new-expense__control:nth-child(3) label {
@@ -61,6 +74,6 @@
     width: 150px;
     height: 30px;
 
-    top: calc( 61% );
-    right: calc( 15% );
+    top: calc( 59% );
+    right: calc( 15.45% );
 }

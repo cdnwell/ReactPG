@@ -1,5 +1,5 @@
 .expense-item {
-    width: 98%;
+    width: 800px;
     height: 100px;
     margin: 1% 1%;
     padding : 10px;
@@ -9,11 +9,11 @@
     flex-direction: row;
     justify-items: flex-end;
 
-    background-color: bisque;
     border-radius: 10px;
 
-    border: 1px solid aqua;
+    border: 1px solid rgb(148, 148, 148);
 }
+
 
 .expense-item__description {
     width: 100%;
@@ -29,7 +29,7 @@
     height: 80px;
     border-radius: 10px;
 
-    background-color: blueviolet;
+    background-color: rgba(112, 52, 168, 0.872);
     color: white;
 
     display: flex;
@@ -39,4 +39,11 @@
 
     border: 2px solid black;
     
+}
+
+.expense-item button{
+    background-color: rgb(143, 140, 140);
+    color: white;
+    border: 1px solid black;
+    border-radius: 10px;
 }
