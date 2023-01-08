@@ -72,8 +72,18 @@
     position: absolute;
 
     width: 150px;
-    height: 30px;
+    height: 40px;
+
+    border: 1px solid #737373;
+    border-radius: 10px;
 
     top: calc( 59% );
-    right: calc( 15.45% );
+}
+
+.new-expense__actions_add {
+    right: calc( 6.45% );
+}
+
+.new-expense__actions_cancel {
+    right: calc( 28% );
 }

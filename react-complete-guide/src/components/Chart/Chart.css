@@ -1,0 +1,14 @@
+.chart {
+    width: 90%;
+    padding : 15px 25px;
+    background-color: #575757;
+
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    color: white;
+}
+

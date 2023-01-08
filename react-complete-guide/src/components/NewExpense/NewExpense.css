@@ -11,3 +11,26 @@
 .new-expense__expense-form{
     width: 1000px;
 }
+
+.new-expense__button-div {
+    width: 850px;
+    height: 100px;
+
+    border: 1px solid #737373;
+    border-radius: 10px;
+
+    background-color: rgb(110, 109, 109);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-expense__button-div button {
+    width: 150px;
+    height: 40px;
+
+    border-radius: 10px;
+    border: 1px solid #737373;
+}
