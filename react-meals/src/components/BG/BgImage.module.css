@@ -1,0 +1,15 @@
+.background_image {
+    width: 100%;
+    min-width: 1024px;
+    max-height: 1024px;
+}
+
+.background_image.blur {
+    filter: blur(5px);
+    transition: filter 2s ease-in-out;
+}
+
+.background_image.clear {
+    filter: blur(0);
+    transition: filter 2s ease-in-out;
+}
