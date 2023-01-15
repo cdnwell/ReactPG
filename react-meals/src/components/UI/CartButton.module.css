@@ -13,6 +13,8 @@
     background-color: rgb(61, 60, 60);
     
     margin-right : calc( 6% );
+
+    cursor: pointer;
 }
 
 .cart_button_icon {

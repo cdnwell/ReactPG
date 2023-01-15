@@ -1,7 +1,11 @@
 .background_image {
+    position: absolute;
+    
     width: 100%;
     min-width: 1024px;
     max-height: 1024px;
+
+    z-index: -1;
 }
 
 .background_image.blur {

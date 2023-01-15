@@ -1,0 +1,50 @@
+.food_item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.food_item__menu{
+    display: flex;
+    flex-direction: column;
+}
+
+.food_item__menu span{
+    padding: 2px 0;
+}
+
+.food_item__menu_name{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.food_item__menu_explain{
+    font-style: italic;
+    font-size: 14px;
+}
+
+.food_item__menu_price{
+    font-weight: bold;
+    color: rgb(223, 169, 7);
+}
+
+.food_item__buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.food_item__amount input{
+    width: 30px;
+    margin: 0 10px;
+}
+
+.food_item__buttons button{
+    background-color: rgb(130, 31, 31);
+    border-radius: 5px;
+    margin: 7px 10px;
+    border: none;
+    padding: 7px;
+    
+    color: white;
+}

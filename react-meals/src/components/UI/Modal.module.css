@@ -1,0 +1,44 @@
+.overlay {
+    position : fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+    transition: all 0.3s ease-out;
+}
+
+.window {
+    position: fixed;
+    top :50%;
+    left : 50%;
+    background-color: white;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px 3px rgba(0,0,0,0.5);
+    z-index: 11;
+    width: 80%;
+    max-width: 450px;
+    padding: 20px;
+
+    border-radius: 5px;
+}
+
+.total_amount_box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.button_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.buttons {
+    margin-left: 10px;
+}
