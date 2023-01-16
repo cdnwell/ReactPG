@@ -6,6 +6,7 @@ import BgImage from "./components/BG/BgImage";
 import classes from "./App.module.css";
 import Header from "./components/Template/Header";
 import Section from "./components/Template/Section";
+import CartProvider from "./components/store/CartProvider";
 
 const CART_ITEM = [
   { menu_name: "Sushi", menu_price: 22.99, menu_ea: 1 },
@@ -20,23 +21,20 @@ function App() {
     setItemsEA(cartItem.length);
   }, [itemsEa, cartItem]);
 
-  const addCartItemHandler = (items) => {
-    setCartItem((prevItems) => [items, ...prevItems]);
-  };
-
   return (
-    <div className={classes.top_div}>
-      {ReactDOM.createPortal(
-        <BgImage />,
-        document.getElementById("background-root")
-      )}
-      <Header
-        onAddItems={addCartItemHandler}
-        itemsEa={itemsEa}
-        cartItem={cartItem}
-      />
-      <Section onAddItems={addCartItemHandler} />
-    </div>
+    <CartProvider>
+      <div className={classes.top_div}>
+        {ReactDOM.createPortal(
+          <BgImage />,
+          document.getElementById("background-root")
+        )}
+        <Header
+          itemsEa={itemsEa}
+          cartItem={cartItem}
+        />
+        <Section />
+      </div>
+    </CartProvider>
   );
 }
 

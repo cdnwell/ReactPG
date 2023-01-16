@@ -11,11 +11,6 @@ const Header = (props) => {
   const [cartIsClicked, setCartIsClicked] = useState(false);
   const [cartItem, setCartItem] = useState(props.cartItem);
   
-  const viaCartItemHandler = (viaCartItem) => {
-    const cartItem = {...viaCartItem};
-    props.onAddItems(cartItem);
-  };
-
   const cartClick = () => {
     setCartIsClicked((prevState) => !prevState);
   };
@@ -27,7 +22,6 @@ const Header = (props) => {
           <Modal
             isModalOn={setCartIsClicked}
             onClose={() => setCartIsClicked(false)}
-            viaCartItemHandler={viaCartItemHandler}
             cartItem={cartItem}
           />,
           document.getElementById("modal-root")

@@ -2,38 +2,6 @@ import { useState } from "react";
 import classes from "./CartItem.module.css";
 
 const CartItem = (props) => {
-  const [menuName, setMenuName] = useState(props.menu_name);
-  const [menuPrice, setMenuPrice] = useState(props.menu_price);
-  const [menuEa, setMenuEa] = useState(props.menu_ea);
-
-  const plusMenuEa = () => {
-    if (menuEa === 100) return;
-
-    const cartData = {
-      menu_name: menuName,
-      menu_price: menuPrice,
-      menu_ea: menuEa + 1,
-    };
-
-    props.onCartItems(cartData);
-  };
-
-  const minusMenuEa = () => {
-    if (menuEa === 0) return;
-
-    const cartData = {
-      menu_name: menuName,
-      menu_price: menuPrice,
-      menu_ea: menuEa - 1,
-    };
-
-    props.onCartItems(cartData);
-  };
-
-  const cartItems = () => {
-    
-  };
-
   return (
     <div className={`${props.className} ${classes.cart_item__box}`}>
       <div className={`${classes.cart_item__root}`}>
@@ -52,13 +20,13 @@ const CartItem = (props) => {
         </div>
         <div className={`${classes.cart_item__buttons_box}`}>
           <button
-            onClick={minusMenuEa}
+            onClick={``}
             className={`${classes.cart_item_info__minus_button}`}
           >
             -
           </button>
           <button
-            onClick={plusMenuEa}
+            onClick={``}
             className={`${classes.cart_item_info__plus}`}
           >
             +

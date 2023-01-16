@@ -31,11 +31,6 @@ const Modal = (props) => {
     }
   };
 
-  const viaCartItemHandler = (viaCartItem) => {
-    const cartItem = {...viaCartItem};
-    props.viaCartItemHandler(cartItem);
-  };
-
   return (
     <div
       className={classes.overlay}
@@ -53,7 +48,6 @@ const Modal = (props) => {
               menu_name={item.menu_name}
               menu_price={item.menu_price}
               menu_ea={item.menu_ea}
-              onCartItems={viaCartItemHandler}
             />
           ))}
         <div className={classes.total_amount_box}>
