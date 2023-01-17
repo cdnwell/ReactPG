@@ -9,8 +9,11 @@ const defaultCartState = {
 
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {
+    // state는 최신 state를 의미한다.
+    // default로 items(메뉴) = [빈 배열], totalAmount(총 가격) = 0
+    // 설정한다.
     const updatedTotalAmount =
-      state.totalAmount + state.item.menu_price * action.item.amount;
+      state.totalAmount + action.item.menu_price * action.item.amount;
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
     );

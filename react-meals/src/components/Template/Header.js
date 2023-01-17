@@ -9,11 +9,14 @@ import Modal from "../UI/Modal";
 
 const Header = (props) => {
   const [cartIsClicked, setCartIsClicked] = useState(false);
-  const [cartItem, setCartItem] = useState(props.cartItem);
   
   const cartClick = () => {
-    setCartIsClicked((prevState) => !prevState);
+    setCartIsClicked(prevState => !prevState);
   };
+
+  const modalClose = () => {
+    setCartIsClicked(false);
+  }
 
   return (
     <header className={classes.meals_header}>
@@ -21,8 +24,7 @@ const Header = (props) => {
         ReactDOM.createPortal(
           <Modal
             isModalOn={setCartIsClicked}
-            onClose={() => setCartIsClicked(false)}
-            cartItem={cartItem}
+            onClose={modalClose}
           />,
           document.getElementById("modal-root")
         )}

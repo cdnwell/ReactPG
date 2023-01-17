@@ -10,6 +10,8 @@ const FoodItem = (props) => {
     const enteredEaAmount = eaInputRef.current.value;
     const enteredEaAmountNumber = +enteredEaAmount;
 
+    console.log('number : ',enteredEaAmountNumber);
+
     cartCtx.addItem({
       id: props.id,
       menu_name: props.menu_name,

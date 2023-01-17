@@ -1,29 +1,21 @@
-import { useContext, useState, useMemo } from "react";
+import { useContext } from "react";
 import CartItem from "../Content/CartItem";
+import CartContext from "../store/cart-context";
 import Button from "./Button";
 import classes from "./Modal.module.css";
 
 const Modal = (props) => {
-  const [cartItem, setCartItem] = useState(props.cartItem);
-  const [totalAmount, setTotalAmount] = useState(0);
+  const cartCtx = useContext(CartContext);
 
-  // useEffect(() => {
-  //   ctx.cartItem.map((item) => {
-  //     console.log("totalAmount", totalAmount);
-  //     setTotalAmount(
-  //       (prevState) => parseInt(prevState) + parseInt(item.menu_price)
-  //     );
-  //   });
-  // }, []);
+  const totalAmount = cartCtx.totalAmount.toFixed(2);
 
-  useMemo(() => {
-    let total = 0;
-    cartItem.forEach((item) => {
-      total += parseFloat(item.menu_price);
-    });
-    total = Math.round(total * 100) / 100;
-    return setTotalAmount(total);
-  }, [cartItem]);
+  const cartItemRemoveHandler = (id) => {
+    cartCtx.removeItem(id);
+  }
+
+  const cartItemAddHandler = (item) => {
+    cartCtx.addItem({...item, amount : 1});
+  }
 
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
@@ -41,13 +33,15 @@ const Modal = (props) => {
         className={classes.window}
         style={{ opacity: props.isModalOn ? "1" : "0" }}
       >
-        {cartItem.length > 0 &&
-          cartItem.map((item) => (
+        {cartCtx.items.length > 0 &&
+          cartCtx.items.map((item) => (
             <CartItem
               key={item.menu_name}
               menu_name={item.menu_name}
               menu_price={item.menu_price}
-              menu_ea={item.menu_ea}
+              menu_ea={item.amount}
+              onRemove={cartItemRemoveHandler.bind(null, item.id)}
+              onAdd={cartItemAddHandler.bind(null, item)}
             />
           ))}
         <div className={classes.total_amount_box}>
@@ -61,6 +55,7 @@ const Modal = (props) => {
       </div>
     </div>
   );
+
 };
 
 export default Modal;

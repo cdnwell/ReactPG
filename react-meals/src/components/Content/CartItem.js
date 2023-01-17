@@ -1,4 +1,3 @@
-import { useState } from "react";
 import classes from "./CartItem.module.css";
 
 const CartItem = (props) => {
@@ -15,18 +14,20 @@ const CartItem = (props) => {
             <p className={`${classes.cart_item_info__price}`}>
               ${props.menu_price}
             </p>
-            <p className={`${classes.cart_item_info__ea}`}>x {props.menu_ea}</p>
+            <p className={`${classes.cart_item_info__ea}`}>
+              x {props.menu_ea}
+            </p>
           </div>
         </div>
         <div className={`${classes.cart_item__buttons_box}`}>
           <button
-            onClick={``}
+            onClick={props.onRemove}
             className={`${classes.cart_item_info__minus_button}`}
           >
             -
           </button>
           <button
-            onClick={``}
+            onClick={props.onAdd}
             className={`${classes.cart_item_info__plus}`}
           >
             +
