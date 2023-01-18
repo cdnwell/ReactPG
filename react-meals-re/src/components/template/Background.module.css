@@ -1,0 +1,47 @@
+.background {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    position: relative;
+}
+
+.imageFlowHideBox {
+    overflow: hidden;
+}
+
+.imageFlowBox {
+    display: flex;
+    flex-direction: row;
+}
+
+.slideMotion {
+    transition: ease-out 0.5s;
+}
+
+.backgroundImage {
+    width: 100%;
+}
+
+.round-button {
+    width: 15px;
+    height: 15px;
+    border: 2px solid black;
+    border-radius: 15px;
+    background-color: white;
+
+    margin: 0 3px;
+}
+
+.left-arrow, .right-arrow {
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+
+    margin: 0 3px;
+}
+
+:is(.left-arrow, .right-arrow, .round-button):hover {
+    background-color: #b7b7b7;
+}
