@@ -1,7 +1,6 @@
 .background {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: center;
 
     position: relative;
@@ -32,6 +31,14 @@
     background-color: white;
 
     margin: 0 3px;
+}
+
+.currentBtn {
+    transition: ease-out 0.3s;
+
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
 }
 
 .left-arrow, .right-arrow {

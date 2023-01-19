@@ -1,0 +1,37 @@
+.cart-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+
+    width: 160px;
+    height: 40px;
+    margin-right: calc( 8% );
+
+    border-radius: 10px;
+
+    background-color: rgb(148, 38, 38);
+}
+
+.cart {
+    margin-left: 10px;
+
+    font-size: 20px;
+    color: white;
+}
+
+.view-cart {
+    color: white;
+}
+
+.count {
+    height: 25px;
+    border-radius: 6px;
+    padding: 1px 5px;
+
+    margin-top: 4px;
+    margin-right: 10px;
+
+    background-color: #393939;
+    color: white;
+}
