@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ReactDOM from "react-dom";
+
 import classes from "./Background.module.css";
 
 const IMG_SRC = [
@@ -173,32 +175,36 @@ const Background = () => {
           })}
         </div>
       </div>
-      <div>
-        <button
-          className={classes["left-arrow"]}
-          onClick={isClickAble ? leftBtnClick : dummyClick}
-        >
-          {"<"}
-        </button>
-        <button
-          className={`${classes["round-button"]} ${currentIndexCnt0}`}
-          onClick={firstIdxClicked}
-        ></button>
-        <button
-          className={`${classes["round-button"]} ${currentIndexCnt1}`}
-          onClick={secondIdxClicked}
-        ></button>
-        <button
-          className={`${classes["round-button"]} ${currentIndexCnt2}`}
-          onClick={thirdIdxClicked}
-        ></button>
-        <button
-          className={classes["right-arrow"]}
-          onClick={isClickAble ? rightBtnClick : dummyClick}
-        >
-          {">"}
-        </button>
-      </div>
+
+      {ReactDOM.createPortal(
+        <div className={classes["buttons-box"]}>
+          <button
+            className={classes["left-arrow"]}
+            onClick={isClickAble ? leftBtnClick : dummyClick}
+          >
+            {"<"}
+          </button>
+          <button
+            className={`${classes["round-button"]} ${currentIndexCnt0}`}
+            onClick={firstIdxClicked}
+          ></button>
+          <button
+            className={`${classes["round-button"]} ${currentIndexCnt1}`}
+            onClick={secondIdxClicked}
+          ></button>
+          <button
+            className={`${classes["round-button"]} ${currentIndexCnt2}`}
+            onClick={thirdIdxClicked}
+          ></button>
+          <button
+            className={classes["right-arrow"]}
+            onClick={isClickAble ? rightBtnClick : dummyClick}
+          >
+            {">"}
+          </button>
+        </div>,
+        document.getElementById("button-box")
+      )}
     </div>
   );
 };

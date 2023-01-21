@@ -3,7 +3,9 @@
     flex-direction: column;
     align-items: center;
 
-    position: relative;
+    position: absolute;
+    
+    z-index: -10;
 }
 
 .imageFlowHideBox {
@@ -23,10 +25,17 @@
     width: 100%;
 }
 
+.buttons-box {
+    position: absolute;
+    top: 475px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .round-button {
     width: 15px;
     height: 15px;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 15px;
     background-color: white;
 
@@ -38,7 +47,7 @@
 
     width: 20px;
     height: 20px;
-    border: 2px solid black;
+    border: 2px solid white;
 }
 
 .left-arrow, .right-arrow {
@@ -52,3 +61,4 @@
 :is(.left-arrow, .right-arrow, .round-button):hover {
     background-color: #b7b7b7;
 }
+

@@ -1,0 +1,13 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.introduce-card {
+    margin-top: 300px;
+}
+
+.main-item-card {
+    margin-top: 80px;
+}
