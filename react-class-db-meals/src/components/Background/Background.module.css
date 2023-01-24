@@ -1,0 +1,59 @@
+.move_animation {    
+    transition: ease-out 0.5s;
+}
+
+.image_box {
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.image_hide_box {
+    width: 1050px;
+    height: 700px;
+    overflow: hidden;
+
+    margin: 0 auto;
+    margin-top: 100px;
+
+    border-radius: 5px;
+
+    position: relative;
+}
+
+.left_arrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    height: 100%;
+
+    background-color: transparent;
+    border: none;
+    color: white;
+
+    font-size: 24px;
+}   
+
+.right_arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    height: 100%;
+
+    background-color: transparent;
+    border: none;
+    color: white;
+
+    font-size: 24px;
+}
+
+.right_arrow:hover {
+    background: linear-gradient(90deg, rgba(0,0,0,0), black);
+}
+
+.left_arrow:hover {
+    background: linear-gradient(90deg, black, rgba(0,0,0,0));
+}
