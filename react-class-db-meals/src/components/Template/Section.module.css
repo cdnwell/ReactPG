@@ -1,0 +1,29 @@
+.introduce_card {
+    position: absolute;   
+    perspective: 700px;
+
+    top: 350px;
+    left: calc( 50% - 350px );
+
+    border-radius: 10px;
+    width: 700px;
+
+    text-align: center;
+}
+
+.introduce, .back{
+    position: absolute;
+    padding: 30px;
+
+    transition: 1s;
+
+    backface-visibility: hidden;
+}
+
+.front {
+    transform: rotateY(0deg);
+}
+
+.back {
+    transform: rotateY(-180deg);
+}

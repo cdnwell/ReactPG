@@ -1,0 +1,26 @@
+.header {
+    position : fixed;
+    top: 0;
+
+    width: 100%;
+    height: 80px;
+
+    background-color: cornflowerblue;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    margin-left: calc( 6% );
+
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.cart {
+    margin-right: calc( 6% );
+}
