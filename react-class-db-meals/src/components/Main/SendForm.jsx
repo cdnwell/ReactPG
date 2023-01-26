@@ -16,7 +16,7 @@ class SendForm extends Component {
 
   input_number(e) {
     const number = e.target.value;
-    const onlyNumber = number.replace(/[^0-9]/g, "");
+    const onlyNumber = number.replace(/[^0-9.]/g, "");
     this.setState({
       number: onlyNumber,
     });
@@ -40,6 +40,7 @@ class SendForm extends Component {
     event.preventDefault();
 
     const data = {
+      id : Math.random().toString(),
       name : this.state.name,
       number : this.state.number,
       text : this.state.text

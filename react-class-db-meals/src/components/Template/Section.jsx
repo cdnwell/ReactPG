@@ -23,8 +23,8 @@ class Section extends Component {
     this.state = {
       isIntroduceClicked: false,
       isPostClicked: false,
-      turningStateA: { },
-      turningStateB: { },
+      turningStateA: {},
+      turningStateB: {},
     };
   }
 

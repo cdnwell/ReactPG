@@ -18,16 +18,34 @@
     position: fixed;
 
     width: 700px;
-    height: 600px;
 
-    top : 300px;
+    top : 50%;
     left: 50%;
 
-    transform: translateX(-50%);
-
+    transform: translate(-50%, -50%);
+    
     margin: 0 auto;
 
     background-color: white;
     border: 1px solid black;
     border-radius: 10px;
+}
+
+.total_amount_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    padding: 20px;
+}
+
+.total_amount {
+    margin-left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.total_amount_price {
+    margin-right: 20px;
+    font-size: 20px;
 }

@@ -1,17 +1,18 @@
 import { useState } from 'react'
 import './App.css'
 import Background from './components/Background/Background'
+import TourProvider from './components/store/TourProvider'
 import Header from './components/Template/Header'
 import Section from './components/Template/Section'
 
 function App() {
 
   return (
-    <div>
+    <TourProvider>
       <Background />
       <Header />
       <Section />
-    </div>
+    </TourProvider>
   )
 }
 

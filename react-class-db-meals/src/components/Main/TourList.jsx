@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import TourContext from '../store/tour-context';
 
 import classes from './TourList.module.css';
 
@@ -9,6 +10,8 @@ class TourList extends Component {
             tour_list : [],
         }
     }
+    
+    static contextType = TourContext;
 
     componentDidMount() {
         fetch("https://react-http-73797-default-rtdb.firebaseio.com/tour-list.json")
@@ -18,7 +21,7 @@ class TourList extends Component {
             const data = response;
             const store = [];
             for(const key in data) {
-                store.push({ name : data[key].name, number : data[key].number, text : data[key].text});
+                store.push({ name : data[key].name, number : data[key].number, text : data[key].text , id : data[key].id});
             }
 
             this.setState({
@@ -36,7 +39,7 @@ class TourList extends Component {
                 const data = response;
                 const store = [];
                 for(const key in data) {
-                    store.push({ name : data[key].name, number : data[key].number, text : data[key].text})
+                    store.push({ name : data[key].name, number : data[key].number, text : data[key].text , id : data[key].id})
                 }
     
                 this.setState({
@@ -44,6 +47,11 @@ class TourList extends Component {
                 });
             }); 
         }
+    }
+
+    addCartHandler (item) {
+        const addItem = {...item, amount : 1};
+        this.context.addItem(addItem);
     }
 
     render() {
@@ -55,7 +63,7 @@ class TourList extends Component {
                 </div>
                 <div className={classes.number_box}>
                     <p>$ {item.number}</p>
-                    <button className={classes.number_button}>+ Add Cart</button>
+                    <button className={classes.number_button} onClick={this.addCartHandler.bind(this,item)}>+ Add Cart</button>
                 </div>
             </div>
         });
