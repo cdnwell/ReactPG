@@ -1,0 +1,9 @@
+.introduce_title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.introduce_section img{
+    display: block;
+}

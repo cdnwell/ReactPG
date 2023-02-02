@@ -1,0 +1,18 @@
+p {
+    margin: 5px 0;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+    padding: 40px;
+
+    background-color: #212121;
+    color: white;
+
+    font-size: 14px;
+}
+
