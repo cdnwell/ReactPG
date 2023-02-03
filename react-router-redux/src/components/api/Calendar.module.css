@@ -1,0 +1,25 @@
+.calendar {
+    display: flex;
+    flex-direction: column;
+
+    width: 400px;
+    border: 1px solid black;
+}
+
+.month_move {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.calendar_days {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.calendar_dates {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -1,0 +1,62 @@
+.book_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 400px;
+
+    border: 1px solid black;
+    border-radius: 10px;
+
+    padding: 20px;
+}
+
+.name_p, .phone_p {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    margin-left: 60px;
+    margin-top : 20px;
+}
+
+.name_input, .phone_input {
+    width: 200px;
+    height: 15px;
+
+    padding : 10px;
+    margin-right : 55px;
+
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.book_p {
+    margin: 10px 0;
+}
+
+.textarea {
+    width: 80%;
+}
+
+.submit_button {
+    width: 200px;
+    height: 40px;
+
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: white;
+
+    margin: 20px 0;
+
+    cursor: pointer;
+}
+
+.submit_button:hover {
+    background-color: #87cefa;
+    color: white;
+    border: 0;
+}

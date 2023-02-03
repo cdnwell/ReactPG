@@ -15,3 +15,8 @@
 
     padding: 0 10px;
 }
+
+:is(.introduce, .book):hover {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+}
