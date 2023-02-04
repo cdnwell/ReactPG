@@ -1,25 +1,230 @@
 .calendar {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    width: 400px;
-    border: 1px solid black;
+  width: 400px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
 .month_move {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  margin-top: 20px;
+}
+
+.arrow_button:first-of-type {
+    background-color: white;
+    border: none;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    border-radius: 3px;
+
+    cursor: pointer;
+}
+
+.arrow_button:last-of-type {
+    background-color: white;
+    border: none;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-radius: 3px;
+
+    cursor: pointer;
+}
+
+.month_button {
+    background-color: white;
+    border: 1px solid black;
+
+    cursor: pointer;
+}
+
+.today {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
+
+    width: 24px;
+    height: 24px;
+    
+    border: 1px solid black;
+    border-radius: 3px;
+    margin: 2px;
+    margin-left : 15px;
+    padding-bottom: 1px;
+
+    cursor: pointer;
+}
+
+.calendar_box {
+  margin: 20px 0;
 }
 
 .calendar_days {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .calendar_dates {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dates_cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+}
+
+.days {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+}
+
+.holiday {
+  color: red;
+}
+
+.dimHoliday {
+  color: rgb(255, 150, 150);
+}
+
+.dimDay {
+  color: rgb(150, 150, 150);
+}
+
+.selectedDate {
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.calendar_dots {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  font-size: 12px;
+}
+
+.morning,
+.afternoon,
+.extra {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 0 3px;
+  margin-top: 10px;
+}
+
+.dot_morning {
+  background-color: yellow;
+  width: 7px;
+  height: 7px;
+
+  border-radius: 7px;
+  border: 1px solid black;
+}
+
+.dot_afternoon {
+  background-color: red;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 8px;
+}
+
+.dot_extra {
+  background-color: blueviolet;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 8px;
+}
+
+.three_dot_box {
+  display: flex;
+  flex-direction: row;
+}
+
+.morning_div, .afternoon_div, .extra_div {
+    margin-left: 1px;
+}
+
+.morning_div {
+  background-color: yellow;
+  width: 3px;
+  height: 3px;
+
+  border-radius: 3px;
+  border: 1px solid black;
+}
+
+.afternoon_div {
+  background-color: red;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 4px;
+}
+
+.extra_div {
+  background-color: blueviolet;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 4px;
+}
+
+.calendar_month_box {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+
+    margin-top : 10px;
+    margin-bottom: 30px;
+}
+
+.months_box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.months {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    width: 52.5px;
+    height: 52.5px;
+}
+
+.months:hover {
+    background-color: cornflowerblue;
+    color: white;
 }

@@ -32,7 +32,7 @@ const BookForm = (props) => {
         전화번호
         <input className={classes.phone_input} type="text" ref={phoneRef} />
       </p>
-      <p>예약일</p>
+      <p className={classes.book_date}>예약일</p>
       <Calendar />
       <p className={classes.book_p}>예약 사항</p>
       <textarea
@@ -41,7 +41,7 @@ const BookForm = (props) => {
         rows="10"
         ref={textRef}
       ></textarea>
-      <button className={classes.submit_button}>제출</button>
+      <button className={classes.submit_button}>예약하기</button>
     </form>
   );
 };

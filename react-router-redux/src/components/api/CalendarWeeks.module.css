@@ -2,3 +2,8 @@
     display: flex;
     flex-direction: row;
 }
+
+.calendar_weeks div:hover {
+    background-color: cornflowerblue;
+    color: white;
+}

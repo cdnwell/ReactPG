@@ -1,0 +1,19 @@
+.address_box {
+    margin: 10px;
+}
+
+.address_button {
+    width: 100px;
+    height: 30px;
+
+    background-color: cornflowerblue;
+    border: none;
+    color: white;
+    
+    cursor: pointer;
+}
+
+.current_address {
+    font-size: 14px;
+    margin-left: 10px;
+}
