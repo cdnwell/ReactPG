@@ -130,8 +130,10 @@
   flex-direction: column;
   align-items: center;
 
-  margin: 0 3px;
-  margin-top: 10px;
+  padding: 0 3px;
+  padding-top: 10px;
+
+  cursor: pointer;
 }
 
 .dot_morning {
@@ -227,4 +229,52 @@
 .months:hover {
     background-color: cornflowerblue;
     color: white;
+}
+
+.calendar_day_pick {
+  display: flex;
+  flex-direction: row;
+
+  margin: 0 auto;
+  margin-top: 5px;
+  width: 200px;
+
+  font-size: 14px;
+}
+
+.one_day_pick {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.two_day_pick {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  margin-left: 10px;
+}
+
+.calendar_day_detail {
+  width: 200px;
+  margin: 5px auto;
+
+  font-size: 12px;
+}
+
+.checkbox_box {
+  display: flex;
+  flex-direction: row;
+}
+
+.checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  margin-left: 5px;
 }

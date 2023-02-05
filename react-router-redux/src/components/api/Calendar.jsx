@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 
 import classes from "./Calendar.module.css";
@@ -18,16 +18,32 @@ const DUMMY_PLAN = [
 const Calendar = () => {
   const [today, setToday] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDateArray, setSelectedDateArray] = useState([new Date()]);
   const [dateArray, setDateArray] = useState([]);
   const [isMonthOn, setIsMonthOn] = useState(false);
   const [monthArray, setMonthArray] = useState([]);
+  const [dayPick, setDayPick] = useState("one");
+  const [isOneDay, setIsOneDay] = useState(true);
+  const [selectedDateStatus, setSelectedDateStatus] = useState([]);
+  const [currentSelectedStatus, setCurrentSelectedStatus] = useState({});
 
   const isSelectedChecker = (array) => {
     if (
+      isOneDay &&
       array.getDate() === selectedDate.getDate() &&
       array.getMonth() === selectedDate.getMonth()
     ) {
       return classes.selectedDate;
+    }
+    if (!isOneDay) {
+      for (let tmp of selectedDateArray) {
+        if (
+          array.getDate() === tmp.getDate() &&
+          array.getMonth() === tmp.getMonth()
+        ) {
+          return classes.selectedDate;
+        }
+      }
     }
     return "";
   };
@@ -144,7 +160,7 @@ const Calendar = () => {
         datesArray[j] = (
           <div
             className={`${isHoliday} ${isDay} ${isSelected[j]} ${classes.dates_cell}`}
-            onClick={() => setSelectedDate(new Date(array[j + i * 7]))}
+            onClick={() => onSelectedDateHandler(array[j + i * 7])}
             key={j + i}
           >
             {array[j + i * 7].getDate()}
@@ -165,22 +181,66 @@ const Calendar = () => {
     }
 
     setDateArray([...weekArray]);
-  }, [selectedDate]);
+  }, [selectedDate, selectedDateArray, isOneDay]);
+
+  const onSelectedDateHandler = (array) => {
+    if (isOneDay) {
+      setSelectedDate(array);
+    } else {
+      if (array.getMonth() !== selectedDateArray[0].getMonth()) {
+        const tmpArray = [array];
+        setSelectedDateArray(tmpArray);
+        setDayPick("one");
+        return;
+      }
+      setSelectedDateArray((prevState) => {
+        for (let item of prevState) {
+          if (
+            item.getMonth() === array.getMonth() &&
+            item.getDate() === array.getDate()
+          ) {
+            const filteredArray = prevState.filter(
+              (items) => items.getDate() !== item.getDate()
+            );
+            return filteredArray.length > 0 ? filteredArray : [...prevState];
+          }
+        }
+        const tmpArray = prevState.concat(array);
+        return [...tmpArray];
+      });
+    }
+  };
 
   const minusMonth = () => {
-    let selectedFirstDate = new Date(selectedDate);
-    selectedFirstDate.setMonth(selectedFirstDate.getMonth() - 1);
-    selectedFirstDate.setDate(1);
-
-    setSelectedDate(selectedFirstDate);
+    if (isOneDay) {
+      let selectedFirstDate = new Date(selectedDate);
+      selectedFirstDate.setMonth(selectedFirstDate.getMonth() - 1);
+      selectedFirstDate.setDate(1);
+      setSelectedDate(selectedFirstDate);
+    } else {
+      let selectedFirstDate = new Date(selectedDateArray[0]);
+      selectedFirstDate.setMonth(selectedFirstDate.getMonth() - 1);
+      selectedFirstDate.setDate(1);
+      const tmpArray = [selectedFirstDate];
+      setSelectedDateArray(tmpArray);
+      setDayPick("one");
+    }
   };
 
   const plusMonth = () => {
-    let selectedFirstDate = new Date(selectedDate);
-    selectedFirstDate.setMonth(selectedFirstDate.getMonth() + 1);
-    selectedFirstDate.setDate(1);
-
-    setSelectedDate(selectedFirstDate);
+    if (isOneDay) {
+      let selectedFirstDate = new Date(selectedDate);
+      selectedFirstDate.setMonth(selectedFirstDate.getMonth() + 1);
+      selectedFirstDate.setDate(1);
+      setSelectedDate(selectedFirstDate);
+    } else {
+      let selectedFirstDate = new Date(selectedDateArray[0]);
+      selectedFirstDate.setMonth(selectedFirstDate.getMonth() + 1);
+      selectedFirstDate.setDate(1);
+      const tmpArray = [selectedFirstDate];
+      setSelectedDateArray(tmpArray);
+      setDayPick("one");
+    }
   };
 
   const dummyMonth = () => {};
@@ -200,49 +260,126 @@ const Calendar = () => {
   };
 
   const onTodayClick = () => {
-    setSelectedDate(today)
-    setIsMonthOn(false);
+    if (isOneDay) {
+      setSelectedDate(today);
+      setIsMonthOn(false);
+    } else {
+      const tmpArray = [today];
+      setSelectedDateArray(tmpArray);
+      setIsMonthOn(false);
+      setDayPick("one");
+    }
   };
 
   const onMonthClick = (month) => {
-    const monthSetting = new Date(selectedDate);
-    monthSetting.setMonth(month);
-    monthSetting.setDate(1);
-    setSelectedDate(monthSetting);
-    setIsMonthOn(false);
+    if (isOneDay) {
+      const monthSetting = new Date(selectedDate);
+      monthSetting.setMonth(month);
+      monthSetting.setDate(1);
+      setSelectedDate(monthSetting);
+      setIsMonthOn(false);
+    } else {
+      const monthSetting = new Date(selectedDate);
+      monthSetting.setMonth(month);
+      monthSetting.setDate(1);
+      const tmpArray = [monthSetting];
+      setSelectedDateArray(tmpArray);
+      setIsMonthOn(false);
+      setDayPick("one");
+    }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const monthArray = [];
 
     for (let i = 0; i < 3; i++) {
       const monthTmpArray = [];
       for (let j = 1; j <= 4; j++) {
-          monthTmpArray.push( <div key={i+j} className={classes.months} onClick={() => onMonthClick(i*4+j-1)}>{i*4+j}</div>);
+        monthTmpArray.push(
+          <div
+            key={i + j}
+            className={classes.months}
+            onClick={() => onMonthClick(i * 4 + j - 1)}
+          >
+            {i * 4 + j}
+          </div>
+        );
       }
-      monthArray.push(<div key={i} className={classes.months_box}>{monthTmpArray}</div>)
+      monthArray.push(
+        <div key={i} className={classes.months_box}>
+          {monthTmpArray}
+        </div>
+      );
     }
 
     setMonthArray([...monthArray]);
-  },[selectedDate]);
+  }, [selectedDate, selectedDateArray]);
+
+  const onDayRadio = (event) => {
+    setDayPick(event.target.value);
+  };
+
+  useEffect(() => {
+    if (dayPick === "one") {
+      setIsOneDay(true);
+      setSelectedDate(selectedDateArray[0]);
+    } else {
+      setIsOneDay(false);
+      setSelectedDateArray([selectedDate]);
+    }
+  }, [dayPick]);
+
+  useEffect(() => {
+    const tmp = (
+      <span className={classes.checkbox_box}>
+        <select>
+          <option value="14">14일</option>
+        </select>
+        <label className={classes.checkbox} htmlFor="morning">
+          {" "}
+          아침
+          <input type="checkbox" id="morning" value="morning" />
+        </label>
+        <label className={classes.checkbox} htmlFor="afternoon">
+          {" "}
+          오후
+          <input type="checkbox" id="afternoon" value="afternoon" />
+        </label>
+        <label className={classes.checkbox} htmlFor="extra">
+          {" "}
+          추가
+          <input type="checkbox" id="extra" value="extra" />
+        </label>
+      </span>
+    );
+  }, [selectedDate, selectedDateArray]);
 
   return (
     <div className={classes.calendar}>
       <div className={classes.month_move}>
-        <button type="button" className={classes.arrow_button} onClick={minusMonthLimit}>
+        <button
+          type="button"
+          className={classes.arrow_button}
+          onClick={minusMonthLimit}
+        >
           {"<"}
         </button>
-        <button type="button" className={classes.month_button} onClick={changeMonth}>
+        <button
+          type="button"
+          className={classes.month_button}
+          onClick={changeMonth}
+        >
           {selectedDate.getFullYear()}-{selectedDate.getMonth() < 9 && "0"}
           {selectedDate.getMonth() + 1}
         </button>
-        <button type="button" className={classes.arrow_button} onClick={plusMonthLimit}>
+        <button
+          type="button"
+          className={classes.arrow_button}
+          onClick={plusMonthLimit}
+        >
           {">"}
         </button>
-        <div
-          className={classes.today}
-          onClick={onTodayClick}
-        >
+        <div className={classes.today} onClick={onTodayClick}>
           {today.getDate()}
         </div>
       </div>
@@ -275,14 +412,55 @@ const Calendar = () => {
               <span>추가</span>
             </div>
           </div>
+          <div className={classes.calendar_day_pick}>
+            <span className={classes.one_day_pick}>
+              1일
+              <input
+                type="radio"
+                name="day"
+                value="one"
+                onChange={onDayRadio}
+                checked={isOneDay ? true : false}
+              />
+            </span>
+            <span className={classes.two_day_pick}>
+              2일 이상
+              <input
+                type="radio"
+                name="day"
+                value="two"
+                onChange={onDayRadio}
+                checked={isOneDay ? false : true}
+              />
+            </span>
+          </div>
+          <div className={classes.calendar_day_detail}>
+            <span className={classes.checkbox_box}>
+              <select>
+                <option value="14">14일</option>
+              </select>
+              <label className={classes.checkbox} htmlFor="morning">
+                {" "}
+                아침
+                <input type="checkbox" id="morning" value="morning" />
+              </label>
+              <label className={classes.checkbox} htmlFor="afternoon">
+                {" "}
+                오후
+                <input type="checkbox" id="afternoon" value="afternoon" />
+              </label>
+              <label className={classes.checkbox} htmlFor="extra">
+                {" "}
+                추가
+                <input type="checkbox" id="extra" value="extra" />
+              </label>
+            </span>
+          </div>
         </div>
       )}
       {isMonthOn && (
-        <div className={classes.calendar_month_box}>
-          {monthArray}
-        </div>
+        <div className={classes.calendar_month_box}>{monthArray}</div>
       )}
-
     </div>
   );
 };
