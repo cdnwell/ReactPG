@@ -24,8 +24,17 @@ const Calendar = () => {
   const [monthArray, setMonthArray] = useState([]);
   const [dayPick, setDayPick] = useState("one");
   const [isOneDay, setIsOneDay] = useState(true);
-  const [selectedDateStatus, setSelectedDateStatus] = useState([]);
   const [currentSelectedStatus, setCurrentSelectedStatus] = useState({});
+  const [options, setOptions] = useState([]);
+  const [selectedDateStatus, setSelectedDateStatus] = useState([]);
+  const [currentOption, setCurrentOption] = useState();
+  const [selectValue, setSelectValue] = useState();
+  const [morningStatus, setMorningStatus] = useState(false);
+  const [afternoonStatus, setAfternoonStatus] = useState(false);
+  const [extraStatus, setExtraStatus] = useState(false);
+  const [morningChecked, setMorningChecked] = useState(false);
+  const [afternoonChecked, setAfternoonChecked] = useState(false);
+  const [extraChecked, setExtraChecked] = useState(false);
 
   const isSelectedChecker = (array) => {
     if (
@@ -51,26 +60,28 @@ const Calendar = () => {
   const isMorningChecker = (item, array) => {
     const isMorning = item.find(
       (item) =>
-        new Date(item.date).getMonth() === array.getMonth() &&
-        new Date(item.date).getDate() === array.getDate() &&
-        item.when === "morning"
+        item.date.getMonth() === array.getMonth() &&
+        item.date.getDate() === array.getDate()
     );
 
-    if (isMorning && isMorning.when === "morning") {
+    if (isMorning && isMorning.morning) {
       return true;
     }
     return false;
   };
 
   const isAfternoonChecker = (item, array) => {
-    const isAfternoon = item.find(
-      (item) =>
-        new Date(item.date).getMonth() === array.getMonth() &&
-        new Date(item.date).getDate() === array.getDate() &&
-        item.when === "afternoon"
-    );
+    let isAfternoon;
+    for (const content of item) {
+      if (
+        content.date.getMonth() === array.getMonth() &&
+        content.date.getDate() === array.getDate()
+      ) {
+        isAfternoon = content.afternoon;
+      }
+    }
 
-    if (isAfternoon && isAfternoon.when === "afternoon") {
+    if (isAfternoon) {
       return true;
     }
     return false;
@@ -79,12 +90,11 @@ const Calendar = () => {
   const isExtraChecker = (item, array) => {
     const isExtra = item.find(
       (item) =>
-        new Date(item.date).getMonth() === array.getMonth() &&
-        new Date(item.date).getDate() === array.getDate() &&
-        item.when === "extra"
+        item.date.getMonth() === array.getMonth() &&
+        item.date.getDate() === array.getDate()
     );
 
-    if (isExtra && isExtra.when === "extra") {
+    if (isExtra && isExtra.extra) {
       return true;
     }
     return false;
@@ -149,9 +159,12 @@ const Calendar = () => {
 
       for (let j = 0; j < 7; j++) {
         isSelected[j] = isSelectedChecker(array[j + i * 7]);
-        isMorning[j] = isMorningChecker(DUMMY_PLAN, array[j + i * 7]);
-        isAfternoon[j] = isAfternoonChecker(DUMMY_PLAN, array[j + i * 7]);
-        isExtra[j] = isExtraChecker(DUMMY_PLAN, array[j + i * 7]);
+        isMorning[j] = isMorningChecker(selectedDateStatus, array[j + i * 7]);
+        isAfternoon[j] = isAfternoonChecker(
+          selectedDateStatus,
+          array[j + i * 7]
+        );
+        isExtra[j] = isExtraChecker(selectedDateStatus, array[j + i * 7]);
 
         const isHoliday =
           j === 0 || j === 6 ? isHolidayChecker(array[j + i * 7]) : "";
@@ -181,7 +194,7 @@ const Calendar = () => {
     }
 
     setDateArray([...weekArray]);
-  }, [selectedDate, selectedDateArray, isOneDay]);
+  }, [selectedDate, selectedDateArray, isOneDay, selectedDateStatus]);
 
   const onSelectedDateHandler = (array) => {
     if (isOneDay) {
@@ -329,30 +342,131 @@ const Calendar = () => {
     }
   }, [dayPick]);
 
+  // useEffect 훅, option 배열 실시간 업데이트 훅
   useEffect(() => {
-    const tmp = (
-      <span className={classes.checkbox_box}>
-        <select>
-          <option value="14">14일</option>
-        </select>
-        <label className={classes.checkbox} htmlFor="morning">
-          {" "}
-          아침
-          <input type="checkbox" id="morning" value="morning" />
-        </label>
-        <label className={classes.checkbox} htmlFor="afternoon">
-          {" "}
-          오후
-          <input type="checkbox" id="afternoon" value="afternoon" />
-        </label>
-        <label className={classes.checkbox} htmlFor="extra">
-          {" "}
-          추가
-          <input type="checkbox" id="extra" value="extra" />
-        </label>
-      </span>
+    let tmpArray = [];
+    if (isOneDay) {
+      tmpArray = [
+        <option key={selectedDate.getDate()} value={selectedDate.getDate()}>
+          {selectedDate.getDate() + "일"}
+        </option>,
+      ];
+      setCurrentOption(selectedDate.getDate());
+    } else {
+      const sortArray = [];
+      for (const date of selectedDateArray) {
+        sortArray.push(date);
+      }
+      sortArray.sort((a, b) => {
+        return a.getDate() - b.getDate();
+      });
+      for (const date of sortArray) {
+        tmpArray.push(
+          <option key={date.getDate()} value={date.getDate()}>
+            {date.getDate() + "일"}
+          </option>
+        );
+      }
+      setCurrentOption(sortArray[0].getDate());
+    }
+
+    setOptions(tmpArray);
+    // isOneDay를 의존성에 넣어 isOneDay가 바뀔 때도 새로 갱신되게 해준다.
+  }, [selectedDate, selectedDateArray, isOneDay]);
+
+  const onSelectHandler = (e) => {
+    // select에서 onChange 속성을 이용해 값을 받아오는 함수
+    // e.target.value로 값을 받아오자 값이 String으로 받아와짐
+    // 일관성을 위해 앞에 +를 붙여 정수로 형변환
+    setCurrentOption(+e.target.value);
+  };
+
+  const morningStatusHandler = () => {
+    setMorningStatus((prevState) => !prevState);
+  };
+
+  const afternoonStatusHandler = () => {
+    setAfternoonStatus((prevState) => !prevState);
+  };
+
+  const extraStatusHandler = () => {
+    setExtraStatus((prevState) => !prevState);
+  };
+
+  // status가 바뀔 때 변경되는 useEffect 훅
+  useEffect(() => {
+    let newStatusArray = [...selectedDateStatus];
+    // filter로 현재 Date가 담긴 state를 기준으로 기존의 Date와 boolean 값이 담긴 객체를 선별한다.
+    // 조건에 맞는 경우에만 newStatusArray에 배열이 들어간다.
+    if (isOneDay) {
+      newStatusArray = [];
+    } else {
+      newStatusArray = newStatusArray.filter((item) => {
+        let result = false;
+        for (const date of selectedDateArray) {
+          result = item.date.getDate() === date.getDate();
+          if (result) break;
+        }
+        return result;
+      });
+    }
+
+    const existingIndex = newStatusArray.findIndex(
+      (item) => item.date.getDate() === currentOption && item.date.getMonth() === selectedDate.getMonth()
     );
-  }, [selectedDate, selectedDateArray]);
+    let tmpArray = [];
+    if (existingIndex !== -1) {
+      // 인덱스가 있어 찾은 경우
+      tmpArray = [...newStatusArray];
+      tmpArray[existingIndex] = {
+        date: new Date(
+          `${selectedDate.getFullYear()}-${selectedDate.getMonth()+1}-${currentOption}`
+        ),
+        morning: morningStatus,
+        afternoon: afternoonStatus,
+        extra: extraStatus,
+      };
+    } else if (currentOption) {
+      // currentOption
+      // 인덱스가 없어 새로 추가해야 하는 경우
+      if (newStatusArray.length > 0) tmpArray = [...newStatusArray];
+      tmpArray = tmpArray.concat({
+        date: new Date(
+          `${selectedDate.getFullYear()}-${selectedDate.getMonth()+1}-${currentOption}`
+        ),
+        morning: morningStatus,
+        afternoon: afternoonStatus,
+        extra: extraStatus,
+      });
+    }
+
+    setSelectedDateStatus(tmpArray);
+  }, [
+    morningStatus,
+    afternoonStatus,
+    extraStatus,
+    currentOption,
+    isOneDay,
+    selectedDate,
+    selectedDateArray,
+  ]);
+
+  // current option이 변경 될 때 checkbox값 기존에 있는 값으로 변경 useEffect 훅
+  useEffect(()=>{
+    let isMorning = false, isAfternoon = false, isExtra = false;
+    for(const item of selectedDateStatus){
+      if(item.date.getDate() === currentOption) {
+        if(item.morning) isMorning = true;
+        if(item.afternoon) isAfternoon = true;
+        if(item.extra) isExtra = true;
+      }
+    }
+
+    setMorningStatus(isMorning);
+    setAfternoonStatus(isAfternoon);
+    setExtraStatus(isExtra);
+    
+  }, [currentOption])
 
   return (
     <div className={classes.calendar}>
@@ -436,23 +550,39 @@ const Calendar = () => {
           </div>
           <div className={classes.calendar_day_detail}>
             <span className={classes.checkbox_box}>
-              <select>
-                <option value="14">14일</option>
-              </select>
+              <select onChange={onSelectHandler} value={selectValue}>{options}</select>
               <label className={classes.checkbox} htmlFor="morning">
                 {" "}
                 아침
-                <input type="checkbox" id="morning" value="morning" />
+                <input
+                  type="checkbox"
+                  id="morning"
+                  onChange={morningStatusHandler}
+                  value={morningStatus}
+                  checked={morningStatus}
+                />
               </label>
               <label className={classes.checkbox} htmlFor="afternoon">
                 {" "}
                 오후
-                <input type="checkbox" id="afternoon" value="afternoon" />
+                <input
+                  type="checkbox"
+                  id="afternoon"
+                  onChange={afternoonStatusHandler}
+                  value={afternoonStatus}
+                  checked={afternoonStatus}
+                />
               </label>
               <label className={classes.checkbox} htmlFor="extra">
                 {" "}
                 추가
-                <input type="checkbox" id="extra" value="extra" />
+                <input
+                  type="checkbox"
+                  id="extra"
+                  onChange={extraStatusHandler}
+                  value={extraStatus}
+                  checked={extraStatus}
+                />
               </label>
             </span>
           </div>
