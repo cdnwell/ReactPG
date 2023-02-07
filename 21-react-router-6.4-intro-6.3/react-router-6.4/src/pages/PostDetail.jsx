@@ -1,0 +1,17 @@
+import BlogPost from '../components/BlogPost';
+import { getPost } from '../util/api';
+
+function PostDetailPage() {
+
+  return (
+    <>
+     <BlogPost title={post.title} text={post.body} />
+    </>
+  );
+}
+
+export default PostDetailPage;
+
+export function loader() {
+  getPost();
+};
