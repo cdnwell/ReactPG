@@ -62,7 +62,11 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        authCtx.login(data.idToken);
+        // 파이어 베이스에서 반환하는 만료 시간은 초를 기준으로 함. 그래서 밀리초로 바꿔야한다.
+        // 반환 값은 String이라 숫자로 바꿈.
+        // 1000을 곱해 밀리세컨드로 바꾼다.
+        const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000));
+        authCtx.login(data.idToken, expirationTime.toISOString());
         // replace는 사용자가 뒤로가기를 눌러 이전 페이지로 갈 수 없게 하는 것이다.
         // /로 시작 페이지로 리디렉션한다.
         history.replace('/');
