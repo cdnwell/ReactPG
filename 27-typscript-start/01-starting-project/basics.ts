@@ -86,7 +86,7 @@ course = 12345;
 // Functions & types //
 // ----------------- //
 
-function add(a: number, b: number): number | string {
+function addNumber(a: number, b: number): number | string {
   return a + b;
 }
 
@@ -96,7 +96,15 @@ function print(value: any) {
 
 // Generics
 
-function insertAtBeginning(array: any[], value: any) {
+function insertAtBeginning<T>(array: T[], value: T) {
   const newArray = [value, ...array];
   return newArray;
 }
+
+const demoArray = [1, 2, 3];
+
+const updatedArray = insertAtBeginning(demoArray, -1);
+const stringArray = insertAtBeginning(['a', 'b', 'c'], 'd');
+
+// updatedArray[0].split('');
+stringArray[0].split('');
